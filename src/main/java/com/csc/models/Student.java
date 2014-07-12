@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "student")
 public class Student {
 
+// Edited from github
 	private Integer id;
 	private String firstName;
 	private String lastName;
