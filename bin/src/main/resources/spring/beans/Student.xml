@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+    <!-- Student business object -->
+   <bean id="studentBo" class="com.csc.bo.impl.StudentBoImpl" >
+   		<property name="studentDao" ref="studentDao" />
+   </bean>
+ 	
+ 
+   <!-- Student Data Access Object -->
+   <bean id="studentDao" class="com.csc.dao.impl.StudentDaoImpl" >
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+ 
+</beans>

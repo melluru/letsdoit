@@ -1,5 +1,7 @@
 package com.csc.resources;
 
+//import java.util.logging.Logger;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,46 +11,75 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.csc.bo.StudentBO;
 import com.csc.models.Student;
+import com.csc.models.Students;
 
-@Path("/helloStudentSprHib")
-@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+@Path("/studentInfo")
+@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 public class StudentsRsrSprHib {
-	
-	@POST
-	public Response postMsg(Student student) {
 
-		ApplicationContext appContext = 
-		    	  new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-		 
-		StudentBO studentBo = (StudentBO)appContext.getBean("studentBo");
+	private ApplicationContext appContext;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(StudentsRsrSprHib.class);
+	
+	public StudentsRsrSprHib() {
+		appContext = new ClassPathXmlApplicationContext(
+				"spring/config/springContext.xml");
+	}
+
+	@POST
+	@Path("/student")
+	public Response postStudent(Student student) {
+
+		StudentBO studentBo = (StudentBO) appContext.getBean("studentBo");
 		studentBo.insert(student);
-		
-		//ApplicationContext context = 
-	    //		new ClassPathXmlApplicationContext("Spring-Module.xml");
-		
-		//StudentDAO stdDAO = (StudentDAO) context.getBean("StudentDAO");
-        //Student std = new Student(student.getId(), student.getFirstName(),student.getLastName());
-        //stdDAO.insert(std);
-		
+		System.out.println(student.getId());
+		// ApplicationContext context =
+		// new ClassPathXmlApplicationContext("Spring-Module.xml");
+
+		// StudentDAO stdDAO = (StudentDAO) context.getBean("StudentDAO");
+		// Student std = new Student(student.getId(),
+		// student.getFirstName(),student.getLastName());
+		// stdDAO.insert(std);
+
 		return Response.status(201).entity(student).build();
+	}
+
+	@POST
+	@Path("/students")
+	public Response postStudents(Students students) {
+		
+		LOG.info("Entering students --------------------");
+		LOG.info(students.getList().get(0).getFirstName());
+
+		//IStudentsBO studentsBO = (IStudentsBO) appContext.getBean("studentsBo");
+		//studentsBO.insert(students);
+		
+		StudentBO studentBo = (StudentBO) appContext.getBean("studentBo");
+		studentBo.insertMultiple(students);
+		
+		//for(Student student: students.getList())
+		//{
+		//	studentBo.insert(student);
+		//}
+		
+		return Response.status(201).entity(students).build();
 	}
 
 	@GET
 	@Path("/{param}")
 	public Student getMsg(@PathParam("param") Integer msg) {
-	    
-		ApplicationContext appContext = 
-		    	  new ClassPathXmlApplicationContext("spring/config/BeanLocations.xml");
-		 
-		StudentBO studentBo = (StudentBO)appContext.getBean("studentBo");
-        Student student2 = studentBo.findByStudentId(msg);
 
-		return student2; 
+		StudentBO studentBo = (StudentBO) appContext.getBean("studentBo");
+		Student student2 = studentBo.findByStudentId(msg);
+
+		return student2;
 	}
 }
