@@ -3,7 +3,6 @@ package com.csc.dao.impl;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -30,7 +29,8 @@ public class StudentDaoImpl extends HibernateDaoSupport implements StudentDAO {
 	}
 
 	public Student findByStudentId(int stdId) {
-		List list = getHibernateTemplate().find("from Student where Id=?",stdId);
+		List<?> list = getHibernateTemplate().find("from Student where Id=?",
+				stdId);
 		return (Student) list.get(0);
 	}
 

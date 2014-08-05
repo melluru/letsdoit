@@ -1,6 +1,6 @@
 package com.csc.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,19 +12,26 @@ public class Student {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private List<ContactInfo> list;
-
-	public List<ContactInfo> getList() {
-		return list;
-	}
-
-	@XmlElement (name = "contactInfo")
-	public void setList(List<ContactInfo> list) {
-		this.list = list;
-	}
+	// private List<ContactInfo> list;
+	private Set<ContactInfo> contacts;;
 
 	// Must have no-argument constructor
 	public Student() {
+	}
+
+	public Student(String fname, String lname) {
+		// TODO Auto-generated constructor stub
+		this.firstName = fname;
+		this.lastName = lname;
+	}
+
+	public Set<ContactInfo> getContacts() {
+		return contacts;
+	}
+
+	@XmlElement(name = "contactInfo")
+	public void setContacts(Set<ContactInfo> contacts) {
+		this.contacts = contacts;
 	}
 
 	@XmlElement
@@ -53,6 +60,5 @@ public class Student {
 	public int getId() {
 		return this.id;
 	}
-
 
 }

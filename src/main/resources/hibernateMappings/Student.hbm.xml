@@ -3,23 +3,37 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jul 12, 2014 8:24:52 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.csc.models.Student" table="STUDENT" catalog="test">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="assigned" />
-        </id>
-        <property name="firstName" type="java.lang.String">
-            <column name="FIRSTNAME" />
-        </property>
-        <property name="lastName" type="java.lang.String">
-            <column name="LASTNAME" />
-        </property>
-        <list name="list" inverse="false" table="CONTACTINFO" lazy="true">
-            <key>
-                <column name="ID" />
-            </key>
-            <list-index></list-index>
-            <one-to-many class="com.csc.models.ContactInfo" />
-        </list>
-    </class>
+	<class name="com.csc.models.Student" table="STUDENT" catalog="test">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="firstName" type="java.lang.String">
+			<column name="FIRSTNAME" />
+		</property>
+		<property name="lastName" type="java.lang.String">
+			<column name="LASTNAME" />
+		</property>
+		<set name="contacts" cascade="all" fetch="join" lazy="false">
+			<key column="studentid" />
+			<one-to-many class="com.csc.models.ContactInfo" />
+		</set>
+	</class>
+
+	<class name="com.csc.models.ContactInfo" table="contact" catalog="test">
+		<meta attribute="class-description">
+			This class contains the contact records.
+		</meta>
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="email" type="java.lang.String">
+			<column name="EMAIL" />
+		</property>
+		<property name="phNo" type="java.lang.Integer">
+			<column name="PHONENO" />
+		</property>	
+	</class>
+
 </hibernate-mapping>

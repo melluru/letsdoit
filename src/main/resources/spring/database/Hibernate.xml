@@ -22,7 +22,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<property name="mappingResources">
 			<list>
 				<value>hibernateMappings/Student.hbm.xml</value>
-				<value>hibernateMappings/ContactInfo.hbm.xml</value>
+				<!--   <value>hibernateMappings/ContactInfo.hbm.xml</value>  -->
 			</list>
 		</property>
 

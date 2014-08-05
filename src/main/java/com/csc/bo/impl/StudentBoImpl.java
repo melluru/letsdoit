@@ -8,7 +8,7 @@ import com.csc.models.Students;
 public class StudentBoImpl implements StudentBO {
 
 	StudentDAO stdDao;
-	 
+
 	public void setStudentDao(StudentDAO stdDao) {
 		this.stdDao = stdDao;
 	}
@@ -18,13 +18,13 @@ public class StudentBoImpl implements StudentBO {
 		stdDao.insert(std);
 	}
 
-	public void insertMultiple(Students students){
+	public void insertMultiple(Students students) {
 		stdDao.insertMultiple(students);
 	}
-	
+
 	public Student findByStudentId(int id) {
 		// TODO Auto-generated method stub
 		return stdDao.findByStudentId(id);
 	}
-	
+
 }
