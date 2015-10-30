@@ -1,0 +1,54 @@
+CREATE TABLE "MANJUNATH"."AGC_HEARSAY_FEED"
+(
+   PRODR_NBR varchar(5) NOT NULL,
+   GENERATION_TS timestamp NOT NULL,
+   HEARSAY_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY 
+      (START WITH 1 
+       INCREMENT BY 1 
+       MINVALUE 1 
+       NO MAXVALUE 
+       NO CYCLE 
+       NO CACHE 
+       ORDER),
+   ACTION_CD varchar(1),
+   STATUS_CD char(1),
+   FST_NM varchar(35),
+   LST_NM varchar(40),
+   MID_NM varchar(35),
+   NICKNAME_NM varchar(35),
+   NM_SUFFIX varchar(15),
+   ADDR_LINE_1 varchar(35),
+   ADDR_LINE_2 varchar(35),
+   ST_ABBR varchar(2),
+   CITY_NM varchar(35),
+   ZIP_CD varchar(13),
+   EMAIL_ADDR varchar(80),
+   PHN_NBR varchar(12),
+   FAX_NBR varchar(12),
+   DIRECT_PHN_NBR varchar(12),
+   PRODR_TYP_NM varchar(50),
+   LATITUDE decimal(22,7),
+   LONGITUDE decimal(22,7),
+   USER_ID varchar(8),
+   AGC_OFF_NM varchar(100),
+   CA_OFF_NM varchar(100),
+   DIST_OFF_NM varchar(100),
+   LICENSE_STATES varchar(50),
+   DESIGNATIONS varchar(100),
+   SPKN_LANG varchar(100),
+   PRODR_ROLE varchar(50),
+   FINCL_LICENSE varchar(1),
+   HEARSAY_CHGS_BEFORE varchar(1000),
+   HEARSAY_CHGS_AFTER varchar(1000),
+   ASSISTANTS varchar(1000),
+   CONSTRAINT null PRIMARY KEY (PRODR_NBR,GENERATION_TS)
+)
+;
+CREATE UNIQUE INDEX AGC041P1 ON "MANJUNATH"."AGC_HEARSAY_FEED"
+(
+  PRODR_NBR,
+  GENERATION_TS
+)
+;
+CREATE UNIQUE INDEX AGC041X2 ON "MANJUNATH"."AGC_HEARSAY_FEED"(HEARSAY_ID)
+;
